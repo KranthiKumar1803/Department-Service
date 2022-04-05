@@ -19,13 +19,13 @@ public class DepartmentController {
 
     @PostMapping("/")
     public Department saveDepartmentBody(@RequestBody Department department){
-        log.info("Post Mapping department ::" + department.toString());
+        log.info("Post Mapping department  |{ }| ::" + department.toString());
         return departmentService.save(department);
     }
 
     @GetMapping("/departmentId/{id}")
     public Department findDepartmentByID(@PathVariable (value = "id") Long departmentId){
-        log.info("Get Mapping save By DepertmentId ::" + departmentId);
+        log.info("Get Mapping save By DepartmentId |{ }| ::" + departmentId);
         return departmentService.getByDepertmentId(departmentId);
     }
 
