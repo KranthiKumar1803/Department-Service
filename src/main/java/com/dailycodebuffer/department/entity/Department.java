@@ -1,18 +1,22 @@
 package com.dailycodebuffer.department.entity;
 
+import com.fasterxml.jackson.core.JsonFactory;
 import org.hibernate.annotations.GeneratorType;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.convert.DataSizeUnit;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
 @Entity
-public class Department {
+public class Department extends JsonFactory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long departmentId;
     private String departmentName;
     private String departmentAdress;
@@ -59,5 +63,15 @@ public class Department {
 
     public void setDepartmentCode(String departmentCode) {
         this.departmentCode = departmentCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "departmentId=" + departmentId +
+                ", departmentName='" + departmentName + '\'' +
+                ", departmentAdress='" + departmentAdress + '\'' +
+                ", departmentCode='" + departmentCode + '\'' +
+                '}';
     }
 }

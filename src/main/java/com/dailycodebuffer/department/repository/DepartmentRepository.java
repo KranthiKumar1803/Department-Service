@@ -9,4 +9,9 @@ public interface DepartmentRepository extends JpaRepository<Department,Long> {
 
     Department findByDepartmentId(Long departmerntId);
 
+//    Department saveErrors(String s);
+
+    Department findByDepartmentName(String deptName);
+
+
 }
