@@ -33,7 +33,7 @@ public class DepartmentService {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Record Not Found");
         }
         return depId.get();
     }

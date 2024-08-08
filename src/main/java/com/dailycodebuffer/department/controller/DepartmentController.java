@@ -21,7 +21,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
 
-    @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/save", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Department> saveDepartmentBody(@RequestBody Department department){
         log.info("Post Mapping department  |{ }| ::" + department.toString());
         department.setJoinedDate(new Date());

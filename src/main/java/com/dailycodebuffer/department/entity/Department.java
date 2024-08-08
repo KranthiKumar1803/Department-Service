@@ -1,11 +1,9 @@
 package com.dailycodebuffer.department.entity;
 
+import jakarta.persistence.Entity;
 import lombok.*;
-import org.springframework.context.annotation.Bean;
-
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
