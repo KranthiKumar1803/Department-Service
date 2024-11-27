@@ -1,9 +1,13 @@
 package com.dailycodebuffer.department.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.*;
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 
 @Entity
@@ -15,8 +19,8 @@ import java.util.Date;
 public class Department {
 
     @Id
-    //@GeneratedValue
-    private String departmentId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long departmentId;
     private String departmentName;
     private String departmentAdress;
     private String departmentCode;
