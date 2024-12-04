@@ -22,7 +22,7 @@ public class DepartmentService {
         return departmentRepository.save(department);
     }
 
-    public Department getByDepertmentId(String departmentId) throws Exception {
+    public Department getByDepertmentId(Long departmentId) throws Exception {
 
         log.info("DepartmentService is in Action getByDepartmentId::");
         Optional<Department> depId = null;

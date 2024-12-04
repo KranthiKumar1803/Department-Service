@@ -31,7 +31,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/departmentId/{id}")
-    public ResponseEntity<Department> findDepartmentByID(@PathVariable (value = "id", required = false) String departmentId){
+    public ResponseEntity<Department> findDepartmentByID(@PathVariable (value = "id", required = false) Long departmentId){
         Department department = null;
         try {
 

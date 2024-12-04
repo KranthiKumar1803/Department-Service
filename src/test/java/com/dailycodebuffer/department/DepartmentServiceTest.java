@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.context.annotation.Description;
 
 import java.net.http.HttpRequest;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class DepartmentServiceTest {
 		//MockitoAnnotations.openMocks(this);
 
 		// Mock repository behavior
-		Department mockDepartment = new Department("101", "Law", "CRM", "Mock Address", new Date());
+		Department mockDepartment = new Department(1L, "Law", "CRM", "Mock Address", new Date());
 		Mockito.when(departmentRepository.save(any(Department.class))).thenReturn(mockDepartment);
 
 	}
@@ -48,7 +49,7 @@ public class DepartmentServiceTest {
 	@Test
 	public void testSaveDepartmentService() {
 		//Arrange
-		Department mockDepartment = new Department("101", "Law", "CRM", "Mock Address", new Date());
+		Department mockDepartment = new Department(1L, "Law", "CRM", "Mock Address", new Date());
 		//Mockito.when(departmentServiceMock.save(any())).thenReturn(mockDepartment);
 		departmentServiceMock.save(mockDepartment);
 		Mockito.verify(departmentRepository, Mockito.times(1)).save(any());
@@ -63,22 +64,47 @@ public class DepartmentServiceTest {
 
 	@Test
 	public void testGetDepartmentById() throws Exception {
-		Department mockDepartment = new Department("1", "Law", "CRM", "Mock Address", new Date());
+		Department mockDepartment = new Department(1L, "Law", "CRM", "Mock Address", new Date());
 
 		Mockito.when(departmentRepository.findById(any())).thenReturn(Optional.of(mockDepartment));
-		departmentServiceMock.getByDepertmentId("1");
-		Mockito.verify(departmentRepository,Mockito.times(1)).findById("1");
+		departmentServiceMock.getByDepertmentId(1L);
+		Mockito.verify(departmentRepository,Mockito.times(1)).findById(1L);
 	}
 
 	@Test
 	public void testGetDepartmentByIdException() throws Exception {
-		Department mockDepartment = new Department("1", "Law", "CRM", "Mock Address", new Date());
+		Department mockDepartment = new Department(1L, "Law", "CRM", "Mock Address", new Date());
         try {
-            departmentServiceMock.getByDepertmentId(" ");
+            departmentServiceMock.getByDepertmentId(3L);
         } catch (Exception e) {
             //throw new RuntimeException(e);
 			Assertions.assertEquals("Record Not Found",e.getMessage());
         }
 
+	}
+
+	@Test
+	@Description("Testing GetDepartmentByName")
+	public void testGetDepartmentByNameException() throws Exception {
+		Department mockDepartment = new Department(1L, "Business", "CRM", "Mock Address", new Date());
+		//Mockito.when(departmentRepository.findByDepartmentName(String.valueOf(mockDepartment.getDepartmentId()))).thenReturn(mockDepartment);
+		try{
+			departmentServiceMock.getByDepartmentName("Business");
+		} catch (Exception e) {
+			//throw new RuntimeException(e);
+			Assertions.assertEquals("Record not found with this Department Name Please recheck :", e.getMessage());
+		}
+
+		//Mockito.verify(departmentRepository,Mockito.times(1)).findByDepartmentName(String.valueOf(mockDepartment.getDepartmentId()));
+	}
+
+	@Test
+	@Description("Testing GetDepartmentByName")
+	public void testGetDepartmentByName() throws Exception {
+		Department mockDepartment = new Department(1L, "Business", "CRM", "Mock Address", new Date());
+		Mockito.when(departmentRepository.findByDepartmentName(mockDepartment.getDepartmentName())).thenReturn(mockDepartment);
+		departmentServiceMock.getByDepartmentName("Business");
+
+		Mockito.verify(departmentRepository,Mockito.times(1)).findByDepartmentName(mockDepartment.getDepartmentName());
 	}
 }
