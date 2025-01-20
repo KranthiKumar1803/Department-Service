@@ -1,0 +1,8 @@
+app:
+  name: app
+  description:
+  greeting: Here is the Greeting card
+
+spring:
+  profiles:
+    active: test
